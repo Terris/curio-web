@@ -1,6 +1,6 @@
-import { styled, getCssText, reset, globalStyles } from "@/components";
-import { Navigation } from "../components/Navigation";
+import { styled, getCssText, reset, globalStyles, Text } from "@/ui";
 import { AuthProvider } from "../context/AuthProvider";
+import { Masthead } from "@/layout";
 
 export const metadata = {
   title: "Curio",
@@ -10,7 +10,6 @@ export const metadata = {
 const getCssAndReset = () => {
   const css = getCssText();
   reset();
-  globalStyles();
   return css;
 };
 
@@ -30,19 +29,14 @@ export default async function RootLayout({
       </head>
       <body>
         <AuthProvider>
-          <Header>
-            <h1>Curiograph </h1>
-            <Navigation />
-          </Header>
-          <div>{children}</div>
+          <Masthead />
+          <Main>{children}</Main>
         </AuthProvider>
       </body>
     </html>
   );
 }
 
-const Header = styled("div", {
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
+const Main = styled("main", {
+  padding: "1rem",
 });

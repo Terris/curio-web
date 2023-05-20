@@ -13,15 +13,19 @@ export const { reset, styled, globalCss, getCssText } = createStitches({
       3: "15px",
     },
     fontSizes: {
-      1: "12px",
-      2: "13px",
-      3: "15px",
+      1: "1rem",
+      2: "1.25rem",
+      3: "1.5rem",
+      4: "2rem",
     },
     fonts: {
       untitled: "Untitled Sans, apple-system, sans-serif",
       mono: "Söhne Mono, menlo, monospace",
     },
-    fontWeights: {},
+    fontWeights: {
+      normal: 400,
+      bold: 700,
+    },
     lineHeights: {},
     letterSpacings: {},
     sizes: {},
