@@ -3,7 +3,6 @@ import { Text, styled } from "@/ui";
 export default function Home() {
   return (
     <Hero>
-      <Text size={4}>Curio.</Text>
       <Text size={2}>
         Transform your experiences into captivating stories, preserving the
         essence of your journey in a single, remarkable platform. Let your story

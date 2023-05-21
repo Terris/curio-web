@@ -5,7 +5,7 @@ export function Masthead() {
   return (
     <StyledMasthead>
       <Text as="h1" size={1}>
-        Curiograph
+        Curio
       </Text>
       <Navigation />
     </StyledMasthead>
