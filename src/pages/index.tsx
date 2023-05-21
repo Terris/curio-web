@@ -1,5 +1,16 @@
 import { Text, styled } from "@/ui";
 
+import { gql, useQuery } from "@apollo/client";
+
+const USERS_QUERY = gql(`
+  query Users {
+    users {
+      id
+      email
+    }
+  }
+`);
+
 export default function Home() {
   return (
     <Hero>
