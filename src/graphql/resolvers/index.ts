@@ -1,5 +1,8 @@
-import Query from "./query.resolvers";
+import { Resolvers } from "@/types/graphql";
+import { getUsers } from "@/graphql/services";
 
-export const resolvers = {
-  Query,
+export const resolvers: Resolvers = {
+  Query: {
+    users: getUsers,
+  },
 };
