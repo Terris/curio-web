@@ -1,12 +1,29 @@
+import { useRouter } from "next/router";
 import { styled, Text, TextButton, TextLink } from "@/ui";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
+import { useEffect } from "react";
 
 interface AdminLayoutProps {
   children: React.ReactNode;
 }
 
 export default function AdminLayout({ children }: AdminLayoutProps) {
+  const router = useRouter();
+  const { status, data: session } = useSession({
+    required: true,
+    onUnauthenticated() {
+      router.replace("/");
+    },
+  });
+
+  useEffect(() => {
+    if (status === "loading") return;
+    if (status === "authenticated" && !session?.user?.isAdmin) {
+      router.replace("/");
+    }
+  }, [status, session, router]);
+
   return (
     <>
       <Masthead />
@@ -38,10 +55,11 @@ function Masthead() {
 }
 
 export function Navigation() {
-  const { data } = useSession();
+  const { status } = useSession();
+  if (status === "loading") return null;
   return (
     <UserNav>
-      {data ? (
+      {status === "authenticated" ? (
         <TextButton onClick={() => signOut()}>Sign Out</TextButton>
       ) : (
         <TextButton onClick={() => signIn()}>Sign In</TextButton>

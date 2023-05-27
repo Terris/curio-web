@@ -38,6 +38,7 @@ const usersQueryDocument = graphql(`
     users {
       id
       email
+      isAdmin
     }
   }
 `);

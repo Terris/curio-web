@@ -2,7 +2,7 @@ import { removeItemsFromObject } from "@/utils";
 import { Table } from ".";
 
 type DataItem =
-  | { [key: string]: string | number | null | undefined }
+  | { [key: string]: string | number | boolean | null | undefined }
   | null
   | undefined;
 
@@ -11,6 +11,11 @@ interface EasyTableProps {
   data: DataItem[];
   skipItems?: string[];
 }
+
+const formatValue = (value: string | number | boolean | null | undefined) => {
+  if (typeof value === "boolean" && value === true) return "true";
+  return value;
+};
 
 export const EasyTable = ({
   data,
@@ -22,7 +27,6 @@ export const EasyTable = ({
     : data.map((record) =>
         removeItemsFromObject({ record, removeItems: skipItems })
       );
-  console.log("Filtered Data", filteredData);
   const headings = filteredData[0] ? Object.keys(filteredData[0]) : [];
   return (
     <Table>
@@ -38,7 +42,7 @@ export const EasyTable = ({
           row ? (
             <Table.Row key={`easy-table-row-${index}`}>
               {Object.values(row).map((value) => (
-                <Table.Cell key={`${value}`}>{value}</Table.Cell>
+                <Table.Cell key={`${value}`}>{formatValue(value)}</Table.Cell>
               ))}
             </Table.Row>
           ) : null

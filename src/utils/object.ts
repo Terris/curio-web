@@ -1,7 +1,4 @@
-type DataItem =
-  | Record<string, string | number | null | undefined>
-  | null
-  | undefined;
+type DataItem = Record<string, any> | null | undefined;
 
 export const removeItemsFromObject = ({
   record,

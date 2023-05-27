@@ -28,8 +28,5 @@ export default createYoga<
     };
   },
   schema,
-  // graphiql: {
-  //   defaultQuery: `query Session { session { expires user { id email image } } }`,
-  // },
   graphqlEndpoint: "/api/graphql",
 });

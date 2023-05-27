@@ -30,10 +30,11 @@ function Masthead() {
 }
 
 export function Navigation() {
-  const { data } = useSession();
+  const { status } = useSession();
+  if (status === "loading") return null;
   return (
     <Nav>
-      {data ? (
+      {status === "authenticated" ? (
         <TextButton onClick={() => signOut()}>Sign Out</TextButton>
       ) : (
         <TextButton onClick={() => signIn()}>Sign In</TextButton>
