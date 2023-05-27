@@ -7,6 +7,7 @@ const getResetAndCss = () => {
   globalStyles();
   return css;
 };
+
 export default function Document() {
   return (
     <Html>

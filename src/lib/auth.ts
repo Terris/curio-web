@@ -20,4 +20,19 @@ export const authOptions: NextAuthOptions = {
       maxAge: 24,
     }),
   ],
+  callbacks: {
+    session: async ({ session, user }) => {
+      if (session.user) {
+        session.user.id = user.id;
+        session.user.isAdmin = user.isAdmin;
+      }
+      return session;
+    },
+    jwt: async ({ user, token }) => {
+      if (user) {
+        token.uid = user.id;
+      }
+      return token;
+    },
+  },
 };
