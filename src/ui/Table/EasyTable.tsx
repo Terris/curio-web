@@ -7,7 +7,6 @@ type DataItem =
   | undefined;
 
 interface EasyTableProps {
-  keyExtractor?: string;
   data: DataItem[];
   skipItems?: string[];
 }
@@ -17,11 +16,7 @@ const formatValue = (value: string | number | boolean | null | undefined) => {
   return value;
 };
 
-export const EasyTable = ({
-  data,
-  keyExtractor,
-  skipItems,
-}: EasyTableProps) => {
+export const EasyTable = ({ data, skipItems }: EasyTableProps) => {
   const filteredData = !skipItems
     ? data
     : data.map((record) =>
