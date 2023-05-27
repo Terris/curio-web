@@ -19,7 +19,7 @@ export const { reset, styled, globalCss, getCssText } = createStitches({
       4: "2rem",
     },
     fonts: {
-      untitled: "Untitled Sans, apple-system, sans-serif",
+      inconsolata: "'Inconsolata', sans-serif",
       mono: "Söhne Mono, menlo, monospace",
     },
     fontWeights: {
@@ -45,7 +45,7 @@ export const { reset, styled, globalCss, getCssText } = createStitches({
 });
 
 export const globalStyles = globalCss({
-  "*": { margin: 0, padding: 0, fontFamily: "$untitled" },
+  "*": { margin: 0, padding: 0, fontFamily: "$inconsolata" },
   body: {
     backgroundColor: "$gray1",
     color: "$gray12",
