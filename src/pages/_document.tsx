@@ -1,12 +1,8 @@
 import { Html, Head, Main, NextScript } from "next/document";
 import { getCssText, reset, globalStyles } from "@/ui";
 
-const getResetAndCss = () => {
-  const css = getCssText();
-  reset();
-  globalStyles();
-  return css;
-};
+reset();
+globalStyles();
 
 export default function Document() {
   return (
@@ -14,7 +10,7 @@ export default function Document() {
       <Head>
         <style
           id="stitches"
-          dangerouslySetInnerHTML={{ __html: getResetAndCss() }}
+          dangerouslySetInnerHTML={{ __html: getCssText() }}
         />
       </Head>
       <body>
