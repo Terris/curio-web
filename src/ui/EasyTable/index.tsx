@@ -1,5 +1,5 @@
 import { removeItemsFromObject } from "@/utils";
-import { Table } from ".";
+import { Table } from "../Table";
 
 type DataItem =
   | { [key: string]: string | number | boolean | null | undefined }

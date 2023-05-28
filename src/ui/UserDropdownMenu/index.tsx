@@ -4,19 +4,35 @@ import { styled } from "../stitches.config";
 import { TextButton } from "../TextButton";
 import { DropdownMenu } from "../DropdownMenu";
 import Link from "next/link";
+import { IconButton } from "../IconButton";
+import { useRole } from "@/hooks/useRole";
 
-export const UserDropdownMenu = () => {
-  const { status } = useSession();
-  if (status === "loading") return null;
+export interface UserDropdownMenuProps {
+  iconSize?: number;
+}
+
+export const UserDropdownMenu = ({ iconSize = 20 }: UserDropdownMenuProps) => {
+  const { status: sessionStatus } = useSession();
+  const { hasRole } = useRole();
+
+  if (sessionStatus === "loading") return null;
+
   return (
     <>
-      {status === "authenticated" ? (
+      {sessionStatus === "authenticated" ? (
         <DropdownMenu>
           <DropdownMenu.Trigger>
-            <RiShieldUserFill size={20} />
+            <IconButton>
+              <RiShieldUserFill size={iconSize} />
+            </IconButton>
           </DropdownMenu.Trigger>
           <DropdownMenu.Menu alignRight>
             <MenuItemsWrapper>
+              {hasRole("admin") && (
+                <MenuItem>
+                  <Link href="/admin">Admin</Link>
+                </MenuItem>
+              )}
               <MenuItem>
                 <Link href="/settings">User Settings</Link>
               </MenuItem>

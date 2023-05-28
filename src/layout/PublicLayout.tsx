@@ -1,4 +1,4 @@
-import { styled, Text, UserDropdownMenu } from "@/ui";
+import { styled, Text, ThemeToggle, UserDropdownMenu, UtilityNav } from "@/ui";
 
 interface PublicLayoutProps {
   children: React.ReactNode;
@@ -11,9 +11,7 @@ export default function PublicLayout({ children }: PublicLayoutProps) {
         <Text as="h1" size={1}>
           Curio
         </Text>
-        <Nav>
-          <UserDropdownMenu />
-        </Nav>
+        <UtilityNav />
       </Masthead>
       <Main>{children}</Main>
     </>

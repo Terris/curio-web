@@ -1,5 +1,12 @@
 import { useRouter } from "next/router";
-import { styled, Text, TextLink, UserDropdownMenu } from "@/ui";
+import {
+  styled,
+  Text,
+  TextLink,
+  UserDropdownMenu,
+  ThemeToggle,
+  UtilityNav,
+} from "@/ui";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useAdminAuthorization } from "@/hooks/useAdminAuthorization";
@@ -37,34 +44,15 @@ function Masthead() {
         <AdminLink href="/admin">Admin</AdminLink>
         <AdminLink href="/admin/users">Users</AdminLink>
       </AdminNav>
-      <Navigation />
+      <UtilityNav />
     </StyledMasthead>
   );
 }
 
-export function Navigation() {
-  const { status } = useSession();
-  if (status === "loading") return null;
-  return (
-    <UserNav>
-      <UserDropdownMenu />
-    </UserNav>
-  );
-}
-
-const Nav = styled("nav", {
+const AdminNav = styled("nav", {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-});
-
-const UserNav = styled(Nav, {
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-});
-
-const AdminNav = styled(Nav, {
   margin: "0 auto 0 3rem",
 });
 
@@ -76,9 +64,9 @@ const StyledMasthead = styled("div", {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  padding: "1rem",
+  padding: "1rem 2rem",
 });
 
 export const Main = styled("main", {
-  padding: "1rem",
+  padding: "1rem 2rem",
 });

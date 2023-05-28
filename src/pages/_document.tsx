@@ -1,9 +1,6 @@
 import { Html, Head, Main, NextScript } from "next/document";
 import { getCssText, reset, globalStyles } from "@/ui";
 
-reset();
-globalStyles();
-
 export default function Document() {
   return (
     <Html>
