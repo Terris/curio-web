@@ -3,6 +3,7 @@ export * from "./DropdownMenu";
 export * from "./Table";
 export * from "./EasyTable";
 export * from "./IconButton";
+export * from "./Logo";
 export * from "./Text";
 export * from "./TextButton";
 export * from "./TextLink";

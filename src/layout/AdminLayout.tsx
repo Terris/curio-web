@@ -6,6 +6,7 @@ import {
   UserDropdownMenu,
   ThemeToggle,
   UtilityNav,
+  Logo,
 } from "@/ui";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
@@ -21,7 +22,21 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
 
   return (
     <>
-      <Masthead />
+      <Masthead>
+        <Text as="h1" size={1}>
+          <Link href="/">
+            <Logo />
+          </Link>{" "}
+          <Text as="span" weight="normal" css={{ color: "$gray9" }}>
+            / Admin
+          </Text>
+        </Text>
+        <AdminNav>
+          <AdminLink href="/admin">Admin</AdminLink>
+          <AdminLink href="/admin/users">Users</AdminLink>
+        </AdminNav>
+        <UtilityNav />
+      </Masthead>
       <Main>{children}</Main>
     </>
   );
@@ -29,24 +44,6 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
 
 export function getAdminLayout(page: React.ReactElement) {
   return <AdminLayout>{page}</AdminLayout>;
-}
-
-function Masthead() {
-  return (
-    <StyledMasthead>
-      <Text as="h1" size={1}>
-        <Link href="/">Curio</Link>{" "}
-        <Text as="span" weight="normal" css={{ color: "$gray9" }}>
-          / Admin
-        </Text>
-      </Text>
-      <AdminNav>
-        <AdminLink href="/admin">Admin</AdminLink>
-        <AdminLink href="/admin/users">Users</AdminLink>
-      </AdminNav>
-      <UtilityNav />
-    </StyledMasthead>
-  );
 }
 
 const AdminNav = styled("nav", {
@@ -60,7 +57,7 @@ const AdminLink = styled(TextLink, {
   padding: "0 1rem",
 });
 
-const StyledMasthead = styled("div", {
+const Masthead = styled("div", {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",

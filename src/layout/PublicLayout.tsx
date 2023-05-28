@@ -1,4 +1,12 @@
-import { styled, Text, ThemeToggle, UserDropdownMenu, UtilityNav } from "@/ui";
+import {
+  Logo,
+  styled,
+  Text,
+  ThemeToggle,
+  UserDropdownMenu,
+  UtilityNav,
+} from "@/ui";
+import Link from "next/link";
 
 interface PublicLayoutProps {
   children: React.ReactNode;
@@ -8,9 +16,9 @@ export default function PublicLayout({ children }: PublicLayoutProps) {
   return (
     <>
       <Masthead>
-        <Text as="h1" size={1}>
-          Curio
-        </Text>
+        <Link href="/">
+          <Logo />
+        </Link>
         <UtilityNav />
       </Masthead>
       <Main>{children}</Main>
@@ -32,7 +40,7 @@ const Masthead = styled("div", {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  padding: "1rem",
+  padding: "1rem 2rem",
 });
 
 export const Main = styled("main", {
