@@ -7,6 +7,7 @@ import {
   ThemeToggle,
   UtilityNav,
   Logo,
+  Masthead,
 } from "@/ui";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
@@ -23,14 +24,9 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
   return (
     <>
       <Masthead>
-        <Text as="h1" size={1}>
-          <Link href="/">
-            <Logo />
-          </Link>{" "}
-          <Text as="span" weight="normal" css={{ color: "$gray9" }}>
-            / Admin
-          </Text>
-        </Text>
+        <Link href="/">
+          <Logo />
+        </Link>
         <AdminNav>
           <AdminLink href="/admin">Admin</AdminLink>
           <AdminLink href="/admin/users">Users</AdminLink>
@@ -55,13 +51,6 @@ const AdminNav = styled("nav", {
 
 const AdminLink = styled(TextLink, {
   padding: "0 1rem",
-});
-
-const Masthead = styled("div", {
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  padding: "1rem 2rem",
 });
 
 export const Main = styled("main", {
