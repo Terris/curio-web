@@ -1,5 +1,4 @@
-import { styled, Text, TextButton } from "@/ui";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { styled, Text, UserDropdownMenu } from "@/ui";
 
 interface PublicLayoutProps {
   children: React.ReactNode;
@@ -8,7 +7,14 @@ interface PublicLayoutProps {
 export default function PublicLayout({ children }: PublicLayoutProps) {
   return (
     <>
-      <Masthead />
+      <Masthead>
+        <Text as="h1" size={1}>
+          Curio
+        </Text>
+        <Nav>
+          <UserDropdownMenu />
+        </Nav>
+      </Masthead>
       <Main>{children}</Main>
     </>
   );
@@ -18,38 +24,13 @@ export function getPublicLayout(page: React.ReactElement) {
   return <PublicLayout>{page}</PublicLayout>;
 }
 
-function Masthead() {
-  return (
-    <StyledMasthead>
-      <Text as="h1" size={1}>
-        Curio
-      </Text>
-      <Navigation />
-    </StyledMasthead>
-  );
-}
-
-export function Navigation() {
-  const { status } = useSession();
-  if (status === "loading") return null;
-  return (
-    <Nav>
-      {status === "authenticated" ? (
-        <TextButton onClick={() => signOut()}>Sign Out</TextButton>
-      ) : (
-        <TextButton onClick={() => signIn()}>Sign In</TextButton>
-      )}
-    </Nav>
-  );
-}
-
 const Nav = styled("nav", {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
 });
 
-const StyledMasthead = styled("div", {
+const Masthead = styled("div", {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",

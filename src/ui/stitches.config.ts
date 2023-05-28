@@ -47,7 +47,7 @@ export const { reset, styled, globalCss, getCssText } = createStitches({
 export const globalStyles = globalCss({
   "*": { margin: 0, padding: 0, fontFamily: "$inconsolata" },
   body: {
-    backgroundColor: "$gray1",
+    backgroundColor: "$gray3",
     color: "$gray12",
     fontSize: "$1",
   },

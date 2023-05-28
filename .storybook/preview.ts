@@ -1,5 +1,6 @@
 import type { Preview } from "@storybook/react";
-import { globalStyles } from "../src/components";
+import { globalStyles } from "../src/ui/stitches.config";
+
 const preview: Preview = {
   parameters: {
     actions: { argTypesRegex: "^on[A-Z].*" },

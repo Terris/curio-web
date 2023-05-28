@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
-import { styled, Text, TextButton, TextLink } from "@/ui";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { styled, Text, TextLink, UserDropdownMenu } from "@/ui";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useAdminAuthorization } from "@/hooks/useAdminAuthorization";
 
 interface AdminLayoutProps {
   children: React.ReactNode;
@@ -10,19 +10,7 @@ interface AdminLayoutProps {
 
 export default function AdminLayout({ children }: AdminLayoutProps) {
   const router = useRouter();
-  const { status, data: session } = useSession({
-    required: true,
-    onUnauthenticated() {
-      router.replace("/");
-    },
-  });
-
-  useEffect(() => {
-    if (status === "loading") return;
-    if (status === "authenticated" && !session?.user?.isAdmin) {
-      router.replace("/");
-    }
-  }, [status, session, router]);
+  useAdminAuthorization({ onUnauthorized: () => router.replace("/") });
 
   return (
     <>
@@ -59,11 +47,7 @@ export function Navigation() {
   if (status === "loading") return null;
   return (
     <UserNav>
-      {status === "authenticated" ? (
-        <TextButton onClick={() => signOut()}>Sign Out</TextButton>
-      ) : (
-        <TextButton onClick={() => signIn()}>Sign In</TextButton>
-      )}
+      <UserDropdownMenu />
     </UserNav>
   );
 }

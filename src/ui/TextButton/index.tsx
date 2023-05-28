@@ -1,11 +1,20 @@
 import { styled } from "../stitches.config";
 
 interface TextButtonProps {
-  label: string;
+  label?: string;
+  children?: React.ReactNode;
+  onClick?: () => void;
 }
 
-export const TextButton = ({ label, ...props }: TextButtonProps) => (
-  <StyledTextButton {...props}>{label}</StyledTextButton>
+export const TextButton = ({
+  label,
+  children,
+  onClick,
+  ...props
+}: TextButtonProps) => (
+  <StyledTextButton {...props} onClick={onClick}>
+    {label ?? children}
+  </StyledTextButton>
 );
 
 export const StyledTextButton = styled("button", {
