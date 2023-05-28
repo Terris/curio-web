@@ -8,6 +8,7 @@ import {
   UtilityNav,
   Logo,
   Masthead,
+  Main,
 } from "@/ui";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
@@ -51,8 +52,4 @@ const AdminNav = styled("nav", {
 
 const AdminLink = styled(TextLink, {
   padding: "0 1rem",
-});
-
-export const Main = styled("main", {
-  padding: "1rem 2rem",
 });

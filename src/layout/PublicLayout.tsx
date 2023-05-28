@@ -1,5 +1,6 @@
 import {
   Logo,
+  Main,
   Masthead,
   styled,
   Text,
@@ -35,8 +36,4 @@ const Nav = styled("nav", {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-});
-
-export const Main = styled("main", {
-  padding: "1rem",
 });

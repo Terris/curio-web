@@ -34,7 +34,7 @@ export const UserDropdownMenu = ({ iconSize = 20 }: UserDropdownMenuProps) => {
                 </MenuItem>
               )}
               <MenuItem>
-                <Link href="/settings">User Settings</Link>
+                <Link href="/settings">Settings</Link>
               </MenuItem>
               <MenuItem onClick={() => signOut()}>Sign Out</MenuItem>
             </MenuItemsWrapper>
