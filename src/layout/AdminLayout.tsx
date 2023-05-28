@@ -1,16 +1,5 @@
 import { useRouter } from "next/router";
-import {
-  styled,
-  Text,
-  TextLink,
-  UserDropdownMenu,
-  ThemeToggle,
-  UtilityNav,
-  Logo,
-  Masthead,
-  Main,
-} from "@/ui";
-import { useSession } from "next-auth/react";
+import { styled, TextLink, UtilityNav, Logo, Masthead, Main } from "@/ui";
 import Link from "next/link";
 import { useAdminAuthorization } from "@/hooks/useAdminAuthorization";
 

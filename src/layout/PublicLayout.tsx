@@ -31,9 +31,3 @@ export default function PublicLayout({ children }: PublicLayoutProps) {
 export function getPublicLayout(page: React.ReactElement) {
   return <PublicLayout>{page}</PublicLayout>;
 }
-
-const Nav = styled("nav", {
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-});

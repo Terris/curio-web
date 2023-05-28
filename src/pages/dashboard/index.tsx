@@ -1,4 +1,5 @@
-import { signOut } from "next-auth/react";
+import { getAppLayout } from "@/layout/AppLayout";
+import { Text } from "@/ui";
 
 export default function DashboardPage({
   children,
@@ -7,12 +8,11 @@ export default function DashboardPage({
 }) {
   return (
     <>
-      <button key="signOut" onClick={() => signOut()}>
-        Sign Out
-      </button>
-      <div>
-        <p>Dashboard</p>
-      </div>
+      <Text as="h2" size={4}>
+        Dashboard
+      </Text>
     </>
   );
 }
+
+DashboardPage.getLayout = getAppLayout;

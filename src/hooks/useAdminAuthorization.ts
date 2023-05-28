@@ -1,5 +1,4 @@
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 interface UseAdminAuthorizationProps {
@@ -9,7 +8,6 @@ interface UseAdminAuthorizationProps {
 export const useAdminAuthorization = ({
   onUnauthorized,
 }: UseAdminAuthorizationProps) => {
-  const router = useRouter();
   const { status, data: session } = useSession({
     required: true,
     onUnauthenticated() {
@@ -23,4 +21,6 @@ export const useAdminAuthorization = ({
       if (onUnauthorized) onUnauthorized();
     }
   }, [status, session, onUnauthorized]);
+
+  return { status, session };
 };
