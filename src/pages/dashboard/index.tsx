@@ -1,11 +1,7 @@
 import { getAppLayout } from "@/layout/AppLayout";
 import { Text } from "@/ui";
 
-export default function DashboardPage({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function DashboardPage() {
   return (
     <>
       <Text as="h2" size={4}>
