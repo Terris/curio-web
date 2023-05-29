@@ -20,6 +20,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
         <AdminNav>
           <AdminLink href="/admin">Admin</AdminLink>
           <AdminLink href="/admin/users">Users</AdminLink>
+          <AdminLink href="/admin/notes">Notes</AdminLink>
         </AdminNav>
         <UtilityNav />
       </Masthead>
