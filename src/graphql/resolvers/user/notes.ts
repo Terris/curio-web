@@ -1,10 +1,10 @@
 import { UserResolvers } from "@/types/resolvers";
-import * as notes from "../../services/notes";
+import { Note } from "../../services";
 
 export const resolveUsersNotes: UserResolvers["notes"] = async (
   parent,
   args,
   context
-) => notes.findAllByUserId(parent.id);
+) => Note.findAllByUserId(parent.id);
 
 export default resolveUsersNotes;

@@ -1,7 +1,7 @@
 import { QueryResolvers } from "@/types/resolvers";
-import * as users from "../../services/users";
+import { User } from "../../services";
 
 const resolveUsers: QueryResolvers["users"] = async (parent, args, context) =>
-  users.findAll();
+  User.findAll();
 
 export default resolveUsers;

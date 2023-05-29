@@ -1,14 +1,13 @@
-import { QueryResolvers, UserResolvers } from "@/types/resolvers";
 import { prisma } from "@/lib/prisma";
 
-export const findAll = async () =>
+const findAll = async () =>
   await prisma.note.findMany({
     include: {
       user: true,
     },
   });
 
-export const findAllByUserId = async (id: string) =>
+const findAllByUserId = async (id: string) =>
   await prisma.note.findMany({
     where: {
       userId: id,
@@ -17,3 +16,10 @@ export const findAllByUserId = async (id: string) =>
       user: true,
     },
   });
+
+const Note = {
+  findAll,
+  findAllByUserId,
+};
+
+export default Note;

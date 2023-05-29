@@ -1,7 +1,7 @@
 import { QueryResolvers } from "@/types/resolvers";
-import * as notes from "../../services/notes";
+import { Note } from "../../services";
 
 const resolveUsers: QueryResolvers["notes"] = async (parent, args, context) =>
-  notes.findAll();
+  Note.findAll();
 
 export default resolveUsers;

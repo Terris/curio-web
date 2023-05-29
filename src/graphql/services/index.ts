@@ -1,2 +1,2 @@
-export * from "./users";
-export * from "./notes";
+export { default as User } from "./user";
+export { default as Note } from "./note";
