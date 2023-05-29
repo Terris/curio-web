@@ -1,11 +1,11 @@
-import { QueryResolvers } from "@/types/graphql";
+import { QueryResolvers } from "@/types/resolvers";
 import { prisma } from "@/lib/prisma";
 
-export const getUsers: QueryResolvers["users"] = async (
-  parent,
-  args,
-  context
-) => {
-  const users = await prisma.user.findMany();
-  return users;
-};
+export const findAll = async () => await prisma.user.findMany();
+
+export const findAllById = async (id: string) =>
+  await prisma.user.findUnique({
+    where: {
+      id,
+    },
+  });

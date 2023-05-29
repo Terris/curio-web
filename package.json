@@ -11,7 +11,9 @@
     "build-storybook": "storybook build",
     "generate:types": "graphql-codegen --config codegen.ts",
     "test": "jest --watch",
-    "test:ci": "jest --ci"
+    "test:ci": "jest --ci",
+    "db:format": "prisma format",
+    "db:migrate": "prisma migrate dev"
   },
   "dependencies": {
     "@apollo/client": "^3.7.14",

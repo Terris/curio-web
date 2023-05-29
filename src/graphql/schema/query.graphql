@@ -1,0 +1,6 @@
+type Query {
+  users: [User]
+  notes: [Note]
+  user(id: String!): User
+  usersNotes(userId: String!): [Note]
+}

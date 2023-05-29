@@ -2,4 +2,5 @@ type User {
   id: String!
   email: String
   isAdmin: Boolean!
+  notes: [Note]
 }
