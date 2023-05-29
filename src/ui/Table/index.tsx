@@ -10,17 +10,17 @@ export const Table = ({ children }: TableProps) => {
 
 const StyledTable = styled("table", {
   width: "100%",
+  borderCollapse: "collapse",
 });
 
 const Head = styled("thead", {
   fontWeight: "bold",
-  borderCollapse: "collapse",
 });
 const Body = styled("tbody", {});
 const Foot = styled("tfoot", {});
 const Row = styled("tr", {});
 const Cell = styled("td", {
-  borderBottom: "1px solid $gray4",
+  borderBottom: "1px solid $gray6",
   padding: "1rem",
 });
 
