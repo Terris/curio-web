@@ -26,9 +26,7 @@ interface UsersViewProps {
 const UsersView = ({ users, loading }: UsersViewProps) => {
   if (loading) return <p>Loading...</p>;
   if (!users) return <p>No users</p>;
-  return (
-    <EasyTable data={users} keyExtractor="id" skipItems={["__typename"]} />
-  );
+  return <EasyTable data={users} skipItems={["__typename"]} />;
 };
 
 AdminUsersPage.getLayout = getAdminLayout;
