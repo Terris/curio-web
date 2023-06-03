@@ -2,6 +2,7 @@ export * from "./Button";
 export * from "./DropdownMenu";
 export * from "./Table";
 export * from "./EasyTable";
+export * from "./Editor";
 export * from "./IconButton";
 export * from "./Logo";
 export * from "./Main";

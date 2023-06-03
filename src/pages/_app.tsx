@@ -6,6 +6,8 @@ import { AuthProvider } from "../context/AuthProvider";
 import { client } from "@/lib/apollo";
 import { reset, globalStyles, lightTheme } from "@/ui";
 import "./fonts.css";
+import "./editor.css";
+import "@draft-js-plugins/inline-toolbar/lib/plugin.css";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: React.ReactElement) => React.ReactNode;

@@ -1,7 +1,7 @@
 import { getPublicLayout } from "@/layout/PublicLayout";
 import { Text } from "@/ui";
 
-export default function HomePage() {
+export default function SettingsPage() {
   return (
     <Text size={4} as="h2">
       Settings
@@ -9,4 +9,4 @@ export default function HomePage() {
   );
 }
 
-HomePage.getLayout = getPublicLayout;
+SettingsPage.getLayout = getPublicLayout;
