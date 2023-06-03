@@ -23,7 +23,7 @@ const emptyContentState = convertFromRaw({
 
 interface EditorProps {
   placeholder?: string;
-  onChange?: Function;
+  onChange?: (contentStateJsonString: string) => void;
   value?: string;
 }
 
@@ -41,20 +41,21 @@ export const Editor = ({
     EditorState.createWithContent(emptyContentState)
   );
 
-  const contentState = editorState.getCurrentContent();
-
-  console.log(JSON.stringify(convertToRaw(contentState)));
+  const handleOnChange = (editorState: EditorState) => {
+    setEditorState(editorState);
+    if (onChange) {
+      const contentState = editorState.getCurrentContent();
+      const rawContentState = convertToRaw(contentState);
+      const contentStateJsonString = JSON.stringify(rawContentState);
+      onChange(contentStateJsonString);
+    }
+  };
 
   return (
     <>
       <StyledEditor
         editorState={editorState}
-        onChange={(editorState) => {
-          setEditorState(editorState);
-          if (onChange) {
-            onChange(editorState.getCurrentContent().getPlainText());
-          }
-        }}
+        onChange={handleOnChange}
         placeholder={placeholder}
         plugins={plugins}
       />
