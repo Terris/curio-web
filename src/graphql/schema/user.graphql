@@ -3,4 +3,5 @@ type User {
   email: String
   isAdmin: Boolean!
   notes: [Note]
+  chats: [Chat]
 }

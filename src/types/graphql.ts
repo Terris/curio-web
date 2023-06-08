@@ -15,6 +15,28 @@ export type Scalars = {
   DateTime: Date;
 };
 
+export type Chat = {
+  __typename?: 'Chat';
+  chatMessages?: Maybe<Array<Maybe<ChatMessage>>>;
+  id: Scalars['String'];
+  user?: Maybe<User>;
+  userId?: Maybe<Scalars['String']>;
+};
+
+export type ChatCompletion = {
+  __typename?: 'ChatCompletion';
+  id: Scalars['String'];
+  message: Scalars['String'];
+};
+
+export type ChatMessage = {
+  __typename?: 'ChatMessage';
+  chat: Chat;
+  chatId: Scalars['String'];
+  content?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+};
+
 export type Note = {
   __typename?: 'Note';
   content?: Maybe<Scalars['String']>;
@@ -28,15 +50,28 @@ export type Note = {
 
 export type Query = {
   __typename?: 'Query';
+  chat?: Maybe<Chat>;
+  chats?: Maybe<Array<Maybe<Chat>>>;
   notes?: Maybe<Array<Maybe<Note>>>;
   user?: Maybe<User>;
   users?: Maybe<Array<Maybe<User>>>;
+  usersChats?: Maybe<Array<Maybe<Chat>>>;
   usersNotes?: Maybe<Array<Maybe<Note>>>;
+};
+
+
+export type QueryChatArgs = {
+  id: Scalars['String'];
 };
 
 
 export type QueryUserArgs = {
   id: Scalars['String'];
+};
+
+
+export type QueryUsersChatsArgs = {
+  userId: Scalars['String'];
 };
 
 
@@ -46,6 +81,7 @@ export type QueryUsersNotesArgs = {
 
 export type User = {
   __typename?: 'User';
+  chats?: Maybe<Array<Maybe<Chat>>>;
   email?: Maybe<Scalars['String']>;
   id: Scalars['String'];
   isAdmin: Scalars['Boolean'];

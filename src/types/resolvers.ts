@@ -15,6 +15,28 @@ export type Scalars = {
   DateTime: Date;
 };
 
+export type Chat = {
+  __typename?: 'Chat';
+  chatMessages?: Maybe<Array<Maybe<ChatMessage>>>;
+  id: Scalars['String'];
+  user?: Maybe<User>;
+  userId?: Maybe<Scalars['String']>;
+};
+
+export type ChatCompletion = {
+  __typename?: 'ChatCompletion';
+  id: Scalars['String'];
+  message: Scalars['String'];
+};
+
+export type ChatMessage = {
+  __typename?: 'ChatMessage';
+  chat: Chat;
+  chatId: Scalars['String'];
+  content?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+};
+
 export type Note = {
   __typename?: 'Note';
   content?: Maybe<Scalars['String']>;
@@ -28,15 +50,28 @@ export type Note = {
 
 export type Query = {
   __typename?: 'Query';
+  chat?: Maybe<Chat>;
+  chats?: Maybe<Array<Maybe<Chat>>>;
   notes?: Maybe<Array<Maybe<Note>>>;
   user?: Maybe<User>;
   users?: Maybe<Array<Maybe<User>>>;
+  usersChats?: Maybe<Array<Maybe<Chat>>>;
   usersNotes?: Maybe<Array<Maybe<Note>>>;
+};
+
+
+export type QueryChatArgs = {
+  id: Scalars['String'];
 };
 
 
 export type QueryUserArgs = {
   id: Scalars['String'];
+};
+
+
+export type QueryUsersChatsArgs = {
+  userId: Scalars['String'];
 };
 
 
@@ -46,6 +81,7 @@ export type QueryUsersNotesArgs = {
 
 export type User = {
   __typename?: 'User';
+  chats?: Maybe<Array<Maybe<Chat>>>;
   email?: Maybe<Scalars['String']>;
   id: Scalars['String'];
   isAdmin: Scalars['Boolean'];
@@ -124,7 +160,11 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
+  Chat: ResolverTypeWrapper<Chat>;
+  ChatCompletion: ResolverTypeWrapper<ChatCompletion>;
+  ChatMessage: ResolverTypeWrapper<ChatMessage>;
   DateTime: ResolverTypeWrapper<Scalars['DateTime']>;
+  ID: ResolverTypeWrapper<Scalars['ID']>;
   Note: ResolverTypeWrapper<Note>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
@@ -134,11 +174,37 @@ export type ResolversTypes = {
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'];
+  Chat: Chat;
+  ChatCompletion: ChatCompletion;
+  ChatMessage: ChatMessage;
   DateTime: Scalars['DateTime'];
+  ID: Scalars['ID'];
   Note: Note;
   Query: {};
   String: Scalars['String'];
   User: User;
+};
+
+export type ChatResolvers<ContextType = any, ParentType extends ResolversParentTypes['Chat'] = ResolversParentTypes['Chat']> = {
+  chatMessages?: Resolver<Maybe<Array<Maybe<ResolversTypes['ChatMessage']>>>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  userId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ChatCompletionResolvers<ContextType = any, ParentType extends ResolversParentTypes['ChatCompletion'] = ResolversParentTypes['ChatCompletion']> = {
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ChatMessageResolvers<ContextType = any, ParentType extends ResolversParentTypes['ChatMessage'] = ResolversParentTypes['ChatMessage']> = {
+  chat?: Resolver<ResolversTypes['Chat'], ParentType, ContextType>;
+  chatId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  content?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export interface DateTimeScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['DateTime'], any> {
@@ -157,13 +223,17 @@ export type NoteResolvers<ContextType = any, ParentType extends ResolversParentT
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  chat?: Resolver<Maybe<ResolversTypes['Chat']>, ParentType, ContextType, RequireFields<QueryChatArgs, 'id'>>;
+  chats?: Resolver<Maybe<Array<Maybe<ResolversTypes['Chat']>>>, ParentType, ContextType>;
   notes?: Resolver<Maybe<Array<Maybe<ResolversTypes['Note']>>>, ParentType, ContextType>;
   user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QueryUserArgs, 'id'>>;
   users?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType>;
+  usersChats?: Resolver<Maybe<Array<Maybe<ResolversTypes['Chat']>>>, ParentType, ContextType, RequireFields<QueryUsersChatsArgs, 'userId'>>;
   usersNotes?: Resolver<Maybe<Array<Maybe<ResolversTypes['Note']>>>, ParentType, ContextType, RequireFields<QueryUsersNotesArgs, 'userId'>>;
 };
 
 export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
+  chats?: Resolver<Maybe<Array<Maybe<ResolversTypes['Chat']>>>, ParentType, ContextType>;
   email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   isAdmin?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
@@ -172,6 +242,9 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
 };
 
 export type Resolvers<ContextType = any> = {
+  Chat?: ChatResolvers<ContextType>;
+  ChatCompletion?: ChatCompletionResolvers<ContextType>;
+  ChatMessage?: ChatMessageResolvers<ContextType>;
   DateTime?: GraphQLScalarType;
   Note?: NoteResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;

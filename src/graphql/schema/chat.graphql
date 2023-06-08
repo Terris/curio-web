@@ -1,0 +1,6 @@
+type Chat {
+  id: String!
+  userId: String
+  user: User
+  chatMessages: [ChatMessage]
+}

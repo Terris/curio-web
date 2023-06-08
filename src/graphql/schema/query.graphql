@@ -1,6 +1,9 @@
 type Query {
   users: [User]
   notes: [Note]
+  chats: [Chat]
+  chat(id: String!): Chat
   user(id: String!): User
   usersNotes(userId: String!): [Note]
+  usersChats(userId: String!): [Chat]
 }

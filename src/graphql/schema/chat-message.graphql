@@ -1,0 +1,6 @@
+type ChatMessage {
+  id: ID!
+  content: String
+  chatId: String!
+  chat: Chat!
+}

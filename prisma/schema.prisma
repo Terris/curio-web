@@ -52,6 +52,7 @@ model User {
   accounts Account[]
   sessions Session[]
   notes    Note[]
+  chats    Chat[]
 }
 
 model VerificationToken {
@@ -71,4 +72,22 @@ model Note {
   updatedAt DateTime @updatedAt
   userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Chat {
+  id           String        @id @default(cuid())
+  userId       String
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  chatMessages ChatMessage[]
+}
+
+model ChatMessage {
+  id        String   @id @default(cuid())
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  chatId    String
+  chat      Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade)
 }
