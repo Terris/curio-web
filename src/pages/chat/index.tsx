@@ -10,15 +10,22 @@ export default function ChatPage() {
   const getChat = async () => {
     if (!prompt) return;
     setLoading(true);
-    const response = await fetch("/api/chat", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ prompt }),
-    });
-    setData(await response.json());
-    if (response && data) setLoading(false);
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ prompt }),
+      });
+      const responseData = await response.json();
+      if (responseData) {
+        setData(await response.json());
+        setLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
