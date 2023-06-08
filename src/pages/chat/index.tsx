@@ -3,11 +3,13 @@ import { Button, Input, Text } from "@/ui";
 import { useState } from "react";
 
 export default function ChatPage() {
+  const [loading, setLoading] = useState<boolean>(false);
   const [prompt, setPrompt] = useState<string>("");
   const [data, setData] = useState<any>(null);
 
   const getChat = async () => {
     if (!prompt) return;
+    setLoading(true);
     const response = await fetch("/api/chat", {
       method: "POST",
       headers: {
@@ -16,6 +18,7 @@ export default function ChatPage() {
       body: JSON.stringify({ prompt }),
     });
     setData(await response.json());
+    if (response && data) setLoading(false);
   };
 
   return (
@@ -24,7 +27,10 @@ export default function ChatPage() {
         Chat
       </Text>
 
-      <div>{data?.data.choices[0].message.content}</div>
+      <Text css={{ paddingBottom: "2rem" }}>
+        {loading && "Loading..."}
+        {data?.data.choices[0].message.content}
+      </Text>
 
       <Input
         label="Prompt"
