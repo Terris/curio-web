@@ -20,7 +20,7 @@ export default function ChatPage() {
       });
       const responseData = await response.json();
       if (responseData) {
-        setData(await response.json());
+        setData(responseData);
         setLoading(false);
       }
     } catch (error) {
