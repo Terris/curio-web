@@ -26,7 +26,23 @@ export type Chat = {
 export type ChatCompletion = {
   __typename?: 'ChatCompletion';
   id: Scalars['String'];
-  message: Scalars['String'];
+  message: ChatCompletionMessage;
+};
+
+export type ChatCompletionInput = {
+  messages?: InputMaybe<Array<ChatCompletionMessageInput>>;
+};
+
+export type ChatCompletionMessage = {
+  __typename?: 'ChatCompletionMessage';
+  content: Scalars['String'];
+  role: Scalars['String'];
+};
+
+export type ChatCompletionMessageInput = {
+  content: Scalars['String'];
+  name?: InputMaybe<Scalars['String']>;
+  role: Scalars['String'];
 };
 
 export type ChatMessage = {
@@ -51,6 +67,7 @@ export type Note = {
 export type Query = {
   __typename?: 'Query';
   chat?: Maybe<Chat>;
+  chatCompletion?: Maybe<ChatCompletion>;
   chats?: Maybe<Array<Maybe<Chat>>>;
   notes?: Maybe<Array<Maybe<Note>>>;
   user?: Maybe<User>;
@@ -62,6 +79,11 @@ export type Query = {
 
 export type QueryChatArgs = {
   id: Scalars['String'];
+};
+
+
+export type QueryChatCompletionArgs = {
+  input: ChatCompletionInput;
 };
 
 
@@ -162,6 +184,9 @@ export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Chat: ResolverTypeWrapper<Chat>;
   ChatCompletion: ResolverTypeWrapper<ChatCompletion>;
+  ChatCompletionInput: ChatCompletionInput;
+  ChatCompletionMessage: ResolverTypeWrapper<ChatCompletionMessage>;
+  ChatCompletionMessageInput: ChatCompletionMessageInput;
   ChatMessage: ResolverTypeWrapper<ChatMessage>;
   DateTime: ResolverTypeWrapper<Scalars['DateTime']>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
@@ -176,6 +201,9 @@ export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'];
   Chat: Chat;
   ChatCompletion: ChatCompletion;
+  ChatCompletionInput: ChatCompletionInput;
+  ChatCompletionMessage: ChatCompletionMessage;
+  ChatCompletionMessageInput: ChatCompletionMessageInput;
   ChatMessage: ChatMessage;
   DateTime: Scalars['DateTime'];
   ID: Scalars['ID'];
@@ -195,7 +223,13 @@ export type ChatResolvers<ContextType = any, ParentType extends ResolversParentT
 
 export type ChatCompletionResolvers<ContextType = any, ParentType extends ResolversParentTypes['ChatCompletion'] = ResolversParentTypes['ChatCompletion']> = {
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  message?: Resolver<ResolversTypes['ChatCompletionMessage'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ChatCompletionMessageResolvers<ContextType = any, ParentType extends ResolversParentTypes['ChatCompletionMessage'] = ResolversParentTypes['ChatCompletionMessage']> = {
+  content?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  role?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -224,6 +258,7 @@ export type NoteResolvers<ContextType = any, ParentType extends ResolversParentT
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   chat?: Resolver<Maybe<ResolversTypes['Chat']>, ParentType, ContextType, RequireFields<QueryChatArgs, 'id'>>;
+  chatCompletion?: Resolver<Maybe<ResolversTypes['ChatCompletion']>, ParentType, ContextType, RequireFields<QueryChatCompletionArgs, 'input'>>;
   chats?: Resolver<Maybe<Array<Maybe<ResolversTypes['Chat']>>>, ParentType, ContextType>;
   notes?: Resolver<Maybe<Array<Maybe<ResolversTypes['Note']>>>, ParentType, ContextType>;
   user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QueryUserArgs, 'id'>>;
@@ -244,6 +279,7 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
 export type Resolvers<ContextType = any> = {
   Chat?: ChatResolvers<ContextType>;
   ChatCompletion?: ChatCompletionResolvers<ContextType>;
+  ChatCompletionMessage?: ChatCompletionMessageResolvers<ContextType>;
   ChatMessage?: ChatMessageResolvers<ContextType>;
   DateTime?: GraphQLScalarType;
   Note?: NoteResolvers<ContextType>;

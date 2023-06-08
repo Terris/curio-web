@@ -3,6 +3,7 @@ type Query {
   notes: [Note]
   chats: [Chat]
   chat(id: String!): Chat
+  chatCompletion(input: ChatCompletionInput!): ChatCompletion
   user(id: String!): User
   usersNotes(userId: String!): [Note]
   usersChats(userId: String!): [Chat]

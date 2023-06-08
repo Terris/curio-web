@@ -26,7 +26,23 @@ export type Chat = {
 export type ChatCompletion = {
   __typename?: 'ChatCompletion';
   id: Scalars['String'];
-  message: Scalars['String'];
+  message: ChatCompletionMessage;
+};
+
+export type ChatCompletionInput = {
+  messages?: InputMaybe<Array<ChatCompletionMessageInput>>;
+};
+
+export type ChatCompletionMessage = {
+  __typename?: 'ChatCompletionMessage';
+  content: Scalars['String'];
+  role: Scalars['String'];
+};
+
+export type ChatCompletionMessageInput = {
+  content: Scalars['String'];
+  name?: InputMaybe<Scalars['String']>;
+  role: Scalars['String'];
 };
 
 export type ChatMessage = {
@@ -51,6 +67,7 @@ export type Note = {
 export type Query = {
   __typename?: 'Query';
   chat?: Maybe<Chat>;
+  chatCompletion?: Maybe<ChatCompletion>;
   chats?: Maybe<Array<Maybe<Chat>>>;
   notes?: Maybe<Array<Maybe<Note>>>;
   user?: Maybe<User>;
@@ -62,6 +79,11 @@ export type Query = {
 
 export type QueryChatArgs = {
   id: Scalars['String'];
+};
+
+
+export type QueryChatCompletionArgs = {
+  input: ChatCompletionInput;
 };
 
 
@@ -108,7 +130,21 @@ export type UsersQuery = { __typename?: 'Query', users?: Array<(
     & { ' $fragmentRefs'?: { 'UserFieldsFragment': UserFieldsFragment } }
   ) | null> | null };
 
+export type ChatCompletionFieldsFragment = { __typename?: 'ChatCompletion', id: string, message: { __typename?: 'ChatCompletionMessage', role: string, content: string } } & { ' $fragmentName'?: 'ChatCompletionFieldsFragment' };
+
+export type ChatCompletionQueryVariables = Exact<{
+  input: ChatCompletionInput;
+}>;
+
+
+export type ChatCompletionQuery = { __typename?: 'Query', chatCompletion?: (
+    { __typename?: 'ChatCompletion' }
+    & { ' $fragmentRefs'?: { 'ChatCompletionFieldsFragment': ChatCompletionFieldsFragment } }
+  ) | null };
+
 export const NotesFieldsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"NotesFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Note"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}}]}}]} as unknown as DocumentNode<NotesFieldsFragment, unknown>;
 export const UserFieldsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"UserFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"User"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"isAdmin"}}]}}]} as unknown as DocumentNode<UserFieldsFragment, unknown>;
+export const ChatCompletionFieldsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ChatCompletionFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ChatCompletion"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"message"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"role"}},{"kind":"Field","name":{"kind":"Name","value":"content"}}]}}]}}]} as unknown as DocumentNode<ChatCompletionFieldsFragment, unknown>;
 export const NotesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Notes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"notes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"NotesFields"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"NotesFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Note"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}}]}}]} as unknown as DocumentNode<NotesQuery, NotesQueryVariables>;
 export const UsersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Users"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"UserFields"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"UserFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"User"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"isAdmin"}}]}}]} as unknown as DocumentNode<UsersQuery, UsersQueryVariables>;
+export const ChatCompletionDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"ChatCompletion"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ChatCompletionInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"chatCompletion"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ChatCompletionFields"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ChatCompletionFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ChatCompletion"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"message"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"role"}},{"kind":"Field","name":{"kind":"Name","value":"content"}}]}}]}}]} as unknown as DocumentNode<ChatCompletionQuery, ChatCompletionQueryVariables>;

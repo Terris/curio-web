@@ -2,41 +2,43 @@ import { getAppLayout } from "@/layout/AppLayout";
 import { Button, Input, Text } from "@/ui";
 import { useState } from "react";
 import { marked } from "marked";
+import { graphql } from "@/types/gql";
+import { useLazyQuery } from "@apollo/client";
+import { ChatCompletionMessage } from "@/types/graphql";
+import { useFragment } from "@/types";
 
 export default function ChatPage() {
-  const [loading, setLoading] = useState<boolean>(false);
   const [prompt, setPrompt] = useState<string>("");
-  const [data, setData] = useState<any>(null);
+  const [messages, setMessages] = useState<ChatCompletionMessage[]>([]);
 
-  const getChat = async () => {
-    if (!prompt) return;
-    setLoading(true);
-    setData(null);
-    try {
-      const response = await fetch("/api/chat", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ prompt }),
-      });
-      console.log(await response);
-      const responseData = await response.json();
-      if (responseData) {
-        setData(responseData);
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const [getChatCompletion, { data, loading, error }] = useLazyQuery(
+    CHAT_COMPLETION_QUERY_DOCUMENT
+  );
 
-  const completion = data?.data?.choices?.[0].message?.content;
+  const chatCompletion = useFragment(
+    CHAT_COMPLETION_FIIELDS_FRAGMENT,
+    data?.chatCompletion
+  );
 
-  const parsedCompletion = !completion
+  const parsedCompletion = !chatCompletion
     ? null
-    : marked.parse(data?.data?.choices?.[0].message?.content);
+    : marked.parse(chatCompletion.message?.content);
+
+  function handlePromptSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    getChatCompletion({
+      variables: {
+        input: {
+          messages: [
+            {
+              role: "user",
+              content: prompt,
+            },
+          ],
+        },
+      },
+    });
+  }
 
   return (
     <>
@@ -44,21 +46,45 @@ export default function ChatPage() {
         Chat
       </Text>
 
-      <Text css={{ paddingBottom: "2rem" }}>{loading && "Loading..."}</Text>
-      <Text as="div" css={{ whiteSpace: "pre-wrap" }}>
-        {parsedCompletion && (
+      {loading && <Text css={{ paddingBottom: "2rem" }}>Loading...</Text>}
+      {error && (
+        <Text css={{ paddingBottom: "2rem" }} color="red">
+          Something went wrong. Please try again.
+        </Text>
+      )}
+      {parsedCompletion && (
+        <Text as="div" css={{ whiteSpace: "pre-wrap" }}>
           <div dangerouslySetInnerHTML={{ __html: parsedCompletion }} />
-        )}
-      </Text>
-
-      <Input
-        label="Prompt"
-        value={prompt}
-        onChange={(e) => setPrompt(e.target.value)}
-      />
-      <Button label="Chat" primary onClick={getChat} />
+        </Text>
+      )}
+      <form onSubmit={handlePromptSubmit}>
+        <Input
+          label="Prompt"
+          value={prompt}
+          onChange={(e) => setPrompt(e.target.value)}
+        />
+        <Button type="submit" label="Chat" primary />
+      </form>
     </>
   );
 }
 
 ChatPage.getLayout = getAppLayout;
+
+export const CHAT_COMPLETION_FIIELDS_FRAGMENT = graphql(/* GraphQL */ `
+  fragment ChatCompletionFields on ChatCompletion {
+    id
+    message {
+      role
+      content
+    }
+  }
+`);
+
+const CHAT_COMPLETION_QUERY_DOCUMENT = graphql(/* GraphQL */ `
+  query ChatCompletion($input: ChatCompletionInput!) {
+    chatCompletion(input: $input) {
+      ...ChatCompletionFields
+    }
+  }
+`);

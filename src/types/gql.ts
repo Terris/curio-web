@@ -17,6 +17,8 @@ const documents = {
     "\n  query Notes {\n    notes {\n      ...NotesFields\n    }\n  }\n": types.NotesDocument,
     "\n  fragment UserFields on User {\n    id\n    email\n    isAdmin\n  }\n": types.UserFieldsFragmentDoc,
     "\n  query Users {\n    users {\n      ...UserFields\n    }\n  }\n": types.UsersDocument,
+    "\n  fragment ChatCompletionFields on ChatCompletion {\n    id\n    message {\n      role\n      content\n    }\n  }\n": types.ChatCompletionFieldsFragmentDoc,
+    "\n  query ChatCompletion($input: ChatCompletionInput!) {\n    chatCompletion(input: $input) {\n      ...ChatCompletionFields\n    }\n  }\n": types.ChatCompletionDocument,
 };
 
 /**
@@ -49,6 +51,14 @@ export function graphql(source: "\n  fragment UserFields on User {\n    id\n    
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  query Users {\n    users {\n      ...UserFields\n    }\n  }\n"): (typeof documents)["\n  query Users {\n    users {\n      ...UserFields\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  fragment ChatCompletionFields on ChatCompletion {\n    id\n    message {\n      role\n      content\n    }\n  }\n"): (typeof documents)["\n  fragment ChatCompletionFields on ChatCompletion {\n    id\n    message {\n      role\n      content\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query ChatCompletion($input: ChatCompletionInput!) {\n    chatCompletion(input: $input) {\n      ...ChatCompletionFields\n    }\n  }\n"): (typeof documents)["\n  query ChatCompletion($input: ChatCompletionInput!) {\n    chatCompletion(input: $input) {\n      ...ChatCompletionFields\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

@@ -1,4 +1,19 @@
 type ChatCompletion {
   id: String!
-  message: String!
+  message: ChatCompletionMessage!
+}
+
+type ChatCompletionMessage {
+  role: String!
+  content: String!
+}
+
+input ChatCompletionMessageInput {
+  role: String!
+  content: String!
+  name: String
+}
+
+input ChatCompletionInput {
+  messages: [ChatCompletionMessageInput!]
 }
