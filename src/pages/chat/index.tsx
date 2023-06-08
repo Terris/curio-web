@@ -1,6 +1,7 @@
 import { getAppLayout } from "@/layout/AppLayout";
 import { Button, Input, Text } from "@/ui";
 import { useState } from "react";
+import { marked } from "marked";
 
 export default function ChatPage() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -10,6 +11,7 @@ export default function ChatPage() {
   const getChat = async () => {
     if (!prompt) return;
     setLoading(true);
+    setData(null);
     try {
       const response = await fetch("/api/chat", {
         method: "POST",
@@ -18,15 +20,23 @@ export default function ChatPage() {
         },
         body: JSON.stringify({ prompt }),
       });
+      console.log(await response);
       const responseData = await response.json();
       if (responseData) {
         setData(responseData);
-        setLoading(false);
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
+
+  const completion = data?.data?.choices?.[0].message?.content;
+
+  const parsedCompletion = !completion
+    ? null
+    : marked.parse(data?.data?.choices?.[0].message?.content);
 
   return (
     <>
@@ -34,9 +44,11 @@ export default function ChatPage() {
         Chat
       </Text>
 
-      <Text css={{ paddingBottom: "2rem" }}>
-        {loading && "Loading..."}
-        {data?.data?.choices?.[0].message?.content}
+      <Text css={{ paddingBottom: "2rem" }}>{loading && "Loading..."}</Text>
+      <Text as="div" css={{ whiteSpace: "pre-wrap" }}>
+        {parsedCompletion && (
+          <div dangerouslySetInnerHTML={{ __html: parsedCompletion }} />
+        )}
       </Text>
 
       <Input

@@ -3666,6 +3666,11 @@
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.194.tgz#b71eb6f7a0ff11bff59fc987134a093029258a76"
   integrity sha512-r22s9tAS7imvBt2lyHC9B8AGwWnXaYb1tY09oyLkXDs4vArpYJzw09nj8MLx5VfciBPGIb+ZwG0ssYnEPJxn/g==
 
+"@types/marked@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@types/marked/-/marked-5.0.0.tgz#3235b9133054e6586eedabfb77aa7d4a4bafbfcf"
+  integrity sha512-YcZe50jhltsCq7rc9MNZC/4QB/OnA2Pd6hrOSTOFajtabN+38slqgDDCeE/0F83SjkKBQcsZUj7VLWR0H5cKRA==
+
 "@types/mdx@^2.0.0":
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/@types/mdx/-/mdx-2.0.5.tgz#9a85a8f70c7c4d9e695a21d5ae5c93645eda64b1"
@@ -8547,6 +8552,11 @@ markdown-to-jsx@^7.1.8:
   version "7.2.0"
   resolved "https://registry.yarnpkg.com/markdown-to-jsx/-/markdown-to-jsx-7.2.0.tgz#e7b46b65955f6a04d48a753acd55874a14bdda4b"
   integrity sha512-3l4/Bigjm4bEqjCR6Xr+d4DtM1X6vvtGsMGSjJYyep8RjjIvcWtrXBS8Wbfe1/P+atKNMccpsraESIaWVplzVg==
+
+marked@^5.0.5:
+  version "5.0.5"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-5.0.5.tgz#1c7bd284d7d29d7d75d6241b26e5d5bf3b558a12"
+  integrity sha512-auTmKJTBwZM/GLVFOhmkY7pL8v/0DxiDaXRC2kEyajcNJ0XXn9NphLD0106dbWrbPwcyD4Y0Dus16OkCzUMkfg==
 
 mdast-util-definitions@^4.0.0:
   version "4.0.0"
