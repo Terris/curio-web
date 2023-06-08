@@ -24,7 +24,7 @@ export default function ChatPage() {
         Chat
       </Text>
 
-      <div>{data.data.choices[0].message.content}</div>
+      <div>{data?.data.choices[0].message.content}</div>
 
       <Input
         label="Prompt"
