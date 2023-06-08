@@ -29,7 +29,7 @@ export default function ChatPage() {
 
       <Text css={{ paddingBottom: "2rem" }}>
         {loading && "Loading..."}
-        {data?.data.choices[0].message.content}
+        {data?.data?.choices?.[0].message?.content}
       </Text>
 
       <Input
