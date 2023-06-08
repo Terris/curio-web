@@ -53,7 +53,13 @@ export const lightTheme = createTheme({
 });
 
 export const globalStyles = globalCss({
-  "*": { margin: 0, padding: 0, fontFamily: "$inconsolata" },
+  "*": {
+    margin: 0,
+    padding: 0,
+    "box-sizing": "border-box",
+    "-webkit-overflow-scrolling": "touch",
+    fontFamily: "$inconsolata",
+  },
   body: {
     backgroundColor: "$gray3",
     color: "$gray12",

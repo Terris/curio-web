@@ -1,9 +1,8 @@
 import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 import { Text } from ".";
 
-test("renders button with label", async () => {
+test("renders text withchildren", async () => {
   render(<Text>TEST TEXT</Text>);
   expect(screen.getByText("TEST TEXT")).toBeInTheDocument();
 });
