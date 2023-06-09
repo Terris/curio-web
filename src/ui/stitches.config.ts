@@ -66,4 +66,5 @@ export const globalStyles = globalCss({
     fontSize: "$1",
   },
   a: { textDecoration: "none", color: "inherit" },
+  "ul,ol": { paddingLeft: "1rem" },
 });

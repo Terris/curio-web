@@ -42,7 +42,7 @@ export default function ChatPage() {
 
   return (
     <>
-      <Text as="h2" size={4} css={{ paddingBottom: "2rem" }}>
+      <Text as="h2" size={4} css={{ paddingBottom: "1rem" }}>
         Chat
       </Text>
 
