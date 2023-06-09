@@ -9,7 +9,7 @@ const resolveCreateChatCompletion: QueryResolvers["chatCompletion"] = async (
   context
 ) => {
   try {
-    authorize(context.user !== null);
+    authorize([{ condition: context.session.user !== null }]);
     validateInput([{ condition: Boolean(args.input) }]);
 
     const response = await ChatCompletion.createCompletion(args.input);
