@@ -1,5 +1,5 @@
 import { getAdminLayout } from "@/layout/AdminLayout";
-import { EasyTable, IconButton, Text } from "@/ui";
+import { EasyTable, IconButton, Loader, Text } from "@/ui";
 import { useQuery } from "@apollo/client";
 import { graphql } from "@/types/gql";
 import { NotesQuery, NotesFieldsFragment, Maybe } from "@/types/graphql";
@@ -7,8 +7,8 @@ import { RiPencilFill } from "react-icons/ri";
 
 export default function AdminUsersPage() {
   const { data, loading, error } = useQuery(ADMIN_NOTES_QUERY_DOCUMENT);
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :(</p>;
+  if (loading) return <Loader loading={loading} />;
+  if (error) return <Text>Error :(</Text>;
   return (
     <>
       <Text as="h2" size={4}>

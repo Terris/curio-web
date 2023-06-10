@@ -5,6 +5,7 @@ export * from "./EasyTable";
 export * from "./Editor";
 export * from "./IconButton";
 export * from "./Input";
+export * from "./Loader";
 export * from "./Logo";
 export * from "./Main";
 export * from "./Masthead";
